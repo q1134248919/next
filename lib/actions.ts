@@ -1,4 +1,5 @@
 "use server";
+import { cache } from "react";
 
 import { hash } from "bcryptjs";
 import { NextResponse } from "next/server";
@@ -6,17 +7,16 @@ import prisma from "@/prisma/prisma";
 import { getTranslations } from "next-intl/server";
 
 import z from "zod";
-import { revalidatePath } from "next/cache";
 
 export const handleResign = async (formData: any) => {
-  const t = await getTranslations("Index");
+  // const t = await getTranslations("Index");
 
   const FormSchema = z.object({
     name: z.string({
       invalid_type_error: "Please select a customer.",
     }),
     email: z.string().email({ message: "无效的邮箱格式" }),
-    password: z.string().min(8, { message: "最少8位" }),
+    password: z.string().min(1, { message: "最少1位" }),
   });
   const validatedFields = FormSchema.safeParse(formData);
   let { name, email, password } = formData;
@@ -31,7 +31,7 @@ export const handleResign = async (formData: any) => {
   });
 
   if (user) {
-    throw new Error(t("test"));
+    throw new Error("test");
   }
   await prisma.user.create({
     data: {
@@ -41,7 +41,11 @@ export const handleResign = async (formData: any) => {
     },
   });
 };
-
+function sleep(ms: number) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
 // export async function createInvoice(formData: FormData) {
 //   const val = FormSchema.safeParse(formData);
 //   if (!val.success) {
@@ -67,14 +71,17 @@ export async function getTag() {
   const user = await prisma.category.findMany();
   return user;
 }
-export async function getPost() {
+
+export const getPost = cache(async () => {
+  await sleep(2000); // 等待 2 秒
   const post = await prisma.post.findMany({
     include: {
       categories: true,
     },
   });
+
   return post;
-}
+});
 export async function getPostDetail(id: number) {
   const post = await prisma.post.findFirst({
     where: {

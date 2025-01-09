@@ -6,6 +6,7 @@ const Home = async () => {
   const { user } = session || {};
 
   const { name } = user || {};
+  console.log("home 我也执行拉");
   return (
     <>
       <Header />

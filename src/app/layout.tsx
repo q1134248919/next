@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 
+import "@ant-design/v5-patch-for-react-19";
+
 import { Toaster } from "react-hot-toast";
 import { SessionProvider } from "next-auth/react";
 import { NextIntlClientProvider } from "next-intl";

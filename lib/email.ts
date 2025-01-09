@@ -4,6 +4,7 @@ import nodemailer from "nodemailer";
 import prisma from "@/prisma/prisma";
 import { v4 as uuidv4 } from "uuid";
 import { hash } from "bcryptjs";
+import { generateRandomCode } from "./index";
 
 const transporter = nodemailer.createTransport({
   service: "qq",
@@ -47,14 +48,4 @@ export const sendEmail = async (email = "1134248919@qq.com") => {
       },
     });
   }
-};
-
-export const generateRandomCode = () => {
-  var code = "";
-  var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-  for (var i = 0; i < 6; i++) {
-    var randomIndex = Math.floor(Math.random() * characters.length);
-    code += characters.charAt(randomIndex);
-  }
-  return code;
 };

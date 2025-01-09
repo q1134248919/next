@@ -6,10 +6,10 @@ async function main() {
   const user = await prisma.category.createMany({
     data: [
       {
-        name: "新闻类",
+        name: "电视类",
       },
       {
-        name: "财经类",
+        name: "海报类",
       },
     ],
   });

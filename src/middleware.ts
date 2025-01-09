@@ -5,7 +5,7 @@ import { chain, FinalNextResponse } from "@nimpl/middleware-chain";
 const intlMiddelware = createMiddleware({
   // A list of all locales that are supported
   locales: ["en", "cn"],
-  // localePrefix: "as-needed",
+  localePrefix: "as-needed",
 
   // Used when no locale matches
   defaultLocale: "cn",

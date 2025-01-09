@@ -9,7 +9,8 @@ import { signIn } from "next-auth/react";
 import { LoginUserInput, loginUserSchema } from "@/lib/user-schema";
 import { Button, Form, Input, message } from "antd";
 import { sendEmail } from "@/lib/email";
-
+const { Password } = Input;
+const { Item } = Form;
 export const LoginForm = () => {
   const router = useRouter();
   const [error, setError] = useState("");
@@ -40,9 +41,11 @@ export const LoginForm = () => {
       const res = await signIn("credentials", {
         email: values.email,
         password: values.password,
-        code: values.code,
+        // code: values.code,
         redirect: false,
       });
+      console.log(res, "res");
+
       if (res?.error) {
         message.error(getMsg(res?.error));
       } else {
@@ -50,7 +53,7 @@ export const LoginForm = () => {
         message.success("successfully logged in");
       }
     } catch (error: any) {
-      console.log(error, "res");
+      console.log(error, "1");
       message.error(error.message);
       setError(error.message);
     }
@@ -58,6 +61,7 @@ export const LoginForm = () => {
 
   const [form] = Form.useForm();
   const email = Form.useWatch("email", form);
+
   return (
     <Form
       name="basic"
@@ -67,22 +71,22 @@ export const LoginForm = () => {
       onFinish={onSubmitHandler}
       autoComplete="off"
     >
-      <Form.Item
+      <Item
         label="email"
         name="email"
         rules={[{ required: true, message: "Please input your username!" }]}
       >
         <Input />
-      </Form.Item>
+      </Item>
 
-      <Form.Item
+      <Item
         label="Password"
         name="password"
         rules={[{ required: true, message: "Please input your password!" }]}
       >
-        <Input.Password />
-      </Form.Item>
-      <Form.Item
+        <Password />
+      </Item>
+      {/* <Item
         label="code"
         name="code"
         rules={[{ required: true, message: "Please input your username!" }]}
@@ -106,13 +110,13 @@ export const LoginForm = () => {
             </Button>
           }
         />
-      </Form.Item>
+      </Item> */}
 
-      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+      <Item wrapperCol={{ offset: 8, span: 16 }}>
         <Button type="primary" htmlType="submit">
           Submit
         </Button>
-      </Form.Item>
+      </Item>
     </Form>
   );
 };

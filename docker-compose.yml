@@ -1,7 +1,9 @@
 version: '3'
 services:
   postgres:
-    image: postgres:latest
+    environment:
+      - TZ=Asia/Shanghai
+    image: postgres:latest    
     container_name: postgres
     ports:
       - '6500:5432'
@@ -11,3 +13,6 @@ services:
       - ./.env
 volumes:
   progresDB:
+
+ 
+

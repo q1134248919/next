@@ -15,10 +15,10 @@ model User {
   name          String
   email         String?   @unique
   password      String?
-  emailVerified DateTime? @map("email_verified")
+  emailVerified DateTime? @map("email_verified") @db.Timestamp()
   image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  createdAt     DateTime  @default(now()) @db.Timestamp()
+  updatedAt     DateTime  @updatedAt @db.Timestamp()
   accounts      Account[]
   sessions      Session[]
 
@@ -37,8 +37,8 @@ model Account {
   expires_at        Int?
   scope             String?
   id_token          String?  @db.Text
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
+  createdAt         DateTime @default(now()) @db.Timestamp()
+  updatedAt         DateTime @updatedAt @db.Timestamp()
   user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
@@ -50,10 +50,10 @@ model Session {
   userId       String?  @map("user_id")
   sessionToken String   @unique @map("session_token") @db.Text
   accessToken  String?  @map("access_token") @db.Text
-  expires      DateTime
+  expires      DateTime @db.Timestamp()
   user         User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  createdAt    DateTime @default(now()) @db.Timestamp()
+  updatedAt    DateTime @updatedAt @db.Timestamp()
 
   @@map("sessions")
 }
@@ -63,9 +63,9 @@ model VerificationRequest {
   email     String   @unique
   token     String   @unique
   code      String
-  expires   DateTime
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  expires   DateTime @db.Timestamp()
+  createdAt DateTime @default(now()) @db.Timestamp()
+  updatedAt DateTime @updatedAt @db.Timestamp()
 
   @@map("verification_request")
 }
@@ -76,7 +76,7 @@ model Post {
   content    String
   url        String[]
   categories Category[]
-  createdAt  DateTime   @default(now())
+  createdAt  DateTime   @default(now()) @db.Timestamp()
 
   @@map("post")
 }
@@ -85,7 +85,7 @@ model Category {
   id        Int      @id @default(autoincrement())
   name      String
   posts     Post[]
-  createdAt DateTime @default(now())
+  createdAt DateTime @default(now()) @db.Timestamp()
 
   @@map("category")
 }
