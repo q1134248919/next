@@ -1,16 +1,14 @@
-"use client";
-
 import Header from "@/components/header";
 import { getPostDetail } from "@/lib/actions";
 import { useRequest } from "ahooks";
 
-export default function ProfileDetail({
+export default async function ProfileDetail({
   params,
 }: {
-  params: { slug: number };
+  params: Promise<{ slug: string }>;
 }) {
-  const { slug } = params;
-  const { data } = useRequest(() => getPostDetail(Number(slug)));
+  const { slug } = await params;
+  const data = await getPostDetail(Number(slug));
   const { content } = data || {};
 
   return (
