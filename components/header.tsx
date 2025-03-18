@@ -3,6 +3,7 @@
 import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import LocaleSwitcherSelect from "./LocaleSwitcherSelect";
 
 const Header = () => {
   const { data: session } = useSession();
@@ -47,7 +48,7 @@ const Header = () => {
             </>
           )}
           {user && (
-            <form action={logoutAction} className="flex">
+            <form action={logoutAction} className="flex  items-center">
               <li>
                 <Link href="/client-side" className="text-ct-dark-600">
                   Client
@@ -63,6 +64,9 @@ const Header = () => {
               </li>
             </form>
           )}
+          <li className="ml-4">
+            <LocaleSwitcherSelect />
+          </li>
         </ul>
       </nav>
     </header>

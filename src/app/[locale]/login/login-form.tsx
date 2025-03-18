@@ -1,14 +1,12 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { signIn } from "next-auth/react";
 import { LoginUserInput, loginUserSchema } from "@/lib/user-schema";
 import { Button, Form, Input, message } from "antd";
-import { sendEmail } from "@/lib/email";
 const { Password } = Input;
 const { Item } = Form;
 export const LoginForm = () => {

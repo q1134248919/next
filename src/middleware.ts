@@ -1,15 +1,10 @@
 import createMiddleware from "next-intl/middleware";
 import { auth } from "@/auth";
+import { routing } from "./i18n/routing";
+
 import { chain, FinalNextResponse } from "@nimpl/middleware-chain";
 
-const intlMiddelware = createMiddleware({
-  // A list of all locales that are supported
-  locales: ["en", "cn"],
-  localePrefix: "as-needed",
-
-  // Used when no locale matches
-  defaultLocale: "cn",
-});
+const intlMiddelware = createMiddleware(routing);
 
 export default chain([
   intlMiddelware,
@@ -19,5 +14,5 @@ export default chain([
   auth as any,
 ]);
 export const config = {
-  matcher: ["/((?!api|_next/static|.*\\..*).*)"],
+  matcher: "/((?!api|trpc|_next|_vercel|.*\\..*).*)",
 };

@@ -73,7 +73,6 @@ export async function getTag() {
 }
 
 export const getPost = cache(async () => {
-  await sleep(2000); // 等待 2 秒
   const post = await prisma.post.findMany({
     include: {
       categories: true,

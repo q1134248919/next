@@ -13,7 +13,7 @@ export default async function BlogPage() {
     <div className="container mx-auto pt-5">
       <Row gutter={[20, 20]}>
         {postList &&
-          postList?.map((item) => {
+          postList?.map((item: any) => {
             const { id, url, title, createdAt, categories } = item;
 
             return (
@@ -38,7 +38,7 @@ export default async function BlogPage() {
                       className="p-5  md:text-sm text-xs"
                     >
                       <div>
-                        {categories.map((item) => item.name).toString()}
+                        {categories.map((item: any) => item.name).toString()}
                       </div>
                       <div>{dayjs(createdAt).format("YYYY/MM/DD")}</div>
                     </Flex>
