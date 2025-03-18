@@ -23,7 +23,7 @@ const nextConfig: NextConfig = {
       static: 180,
     },
   },
-  // output: "standalone",
+  output: "standalone",
 
   reactStrictMode: false,
   // swcMinify: true,

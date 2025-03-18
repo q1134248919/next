@@ -8,7 +8,6 @@ import MyEditor from "@/components/MyEditor";
 import BlogPage from "@/components/BlogPage";
 
 export default function Profile() {
-  console.log("page执行!");
   // const [visible, setVisible] = useState(false);
   return (
     <>

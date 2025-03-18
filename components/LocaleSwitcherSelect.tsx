@@ -16,7 +16,6 @@ export default function LocaleSwitcherSelect() {
   const defaultValue = useLocale();
   const [value, setValue] = useState(defaultValue);
   function onSelectChange(nextLocale: any) {
-    console.log(nextLocale, "nextLocale");
     startTransition(() => {
       setValue(nextLocale);
       router.replace(
@@ -28,7 +27,6 @@ export default function LocaleSwitcherSelect() {
       );
     });
   }
-  console.log(value, "defaultValue");
   return (
     <Select
       value={value}
